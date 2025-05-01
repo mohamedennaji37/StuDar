@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accueil Propriétaire</title>
+    <!-- Vos liens CSS/JS existants (gardez-les si besoin) -->
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="main.js"></script>
+    
+    <!-- Import d'une police Google (exemple) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" 
+      rel="stylesheet"
+    >
+
+    <!-- Styles intégrés pour un meilleur rendu -->
+    <style>
+        /* Réinitialisation simple */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f3f5f9; /* Couleur de fond */
+            color: #333;
+        }
+
+        /* HEADER */
+         /* Header */
+         header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            margin: 0 15px;
+            color: #00A2CE;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #00BBD0;
+            text-decoration: underline;
+        }
+
+        /* SECTION PRINCIPALE */
+        .main.owner-home {
+            /* Hauteur minimale pour “pousser” le footer en bas
+               lorsqu'il n'y a pas beaucoup de contenu */
+            min-height: 80vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #e6f0ff 0%, #ffffff 100%);
+        }
+        .content {
+            max-width: 550px;
+        }
+        .content h1 {
+            font-size: 2.4rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #666;
+        }
+        /* Bouton d'ajout de maison */
+        .add-house-btn {
+            background: #28a745; /* Vert */
+            color: #fff;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+        }
+        .add-house-btn:hover {
+            background: #218838;
+        }
+
+        /* IMAGE */
+        .image img {
+            width: 600px;      /* Largeur plus importante */
+            max-width: 100%;   /* S'adapte en cas d'écran plus petit */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: s z30px;
+            background: #87CEEB;
+            color: white;
+            margin-top: 20px;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .social-icons a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            border: 1px solid #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .social-icons a:hover {
+            background: #fff;
+            color: #333;
+        }
+        .signup {
+            background: #00A2CE;
+            color: white;
+        }
+
+        .signin {
+            background: #00BBD0;
+            color: white;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-weight: bold;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background: #5FE3A4;
+        }
+        /* RESPONSIVE (optionnel) */
+        @media (max-width: 768px) {
+            .main.owner-home {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 20px;
+            }
+            .image img {
+                width: 80%;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="photo/studar logo LONG.png" alt="Étudiant Logement" class="logo-img">
+        </a>
+            
+        <nav>
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="offer.html" class="nav-link">OFFER</a>
+
+            <a href="#" class="nav-link">CONTACT US</a>
+            
+            <a href="choisirTypeSinup.html"> <button class="signup">Sign Up</button></a>
+            <a href="choisirTypeSinin.html"> <button class="signin">Sign In</button></a>
+            <a href="infoEtudiant.html" class="nav-link">Mes reservation</a>
+            <a href="#" class="nav-link">CONTACT US</a>
+            
+            
+
+        </nav>
+    </header>
+
+    <!-- SECTION PRINCIPALE -->
+    <section class="main owner-home">
+        <div class="content">
+            <!-- Premier slogan -->
+            <h1>Proposez votre logement en toute simplicité</h1>
+            <!-- Deuxième slogan -->
+            <h2>Rejoignez notre communauté de propriétaires</h2>
+            <!-- Description pour le propriétaire -->
+            <p>
+                Vous souhaitez louer votre maison ou appartement à des étudiants ?
+                Notre plateforme vous permet de publier facilement votre annonce
+                et de toucher un large public d’étudiants à la recherche
+                d’un logement. Créez votre annonce dès maintenant
+                et facilitez vos démarches de location.
+            </p>
+            <!-- Bouton pour ajouter une maison -->
+            <a href="addHomeCheckhome.html"><button class="add-house-btn">Ajouter votre maison</button></a>
+        </div>
+
+        <!-- Image illustrative (chemin à adapter) -->
+        <div class="image">
+            <img src="./photo/image.png" alt="Propriétaire ajoutant sa maison" />
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Suivez-nous :</p>
+        <div class="social-icons">
+            <a href="#" class="facebook">Facebook</a>
+            <a href="#" class="instagram">Instagram</a>
+            <a href="https://wa.me/123456789" class="whatsapp">WhatsApp</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addHouseButton = document.querySelector('.add-house-btn');
+            if (addHouseButton) {
+                addHouseButton.addEventListener('click', function() {
+                    // Your event handler code here
+                    console.log('Add house button clicked');
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

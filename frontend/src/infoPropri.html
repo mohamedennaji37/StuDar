@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de Réservation</title>
+    <script defer src="main.js"></script>
+    <style>
+        /* General Style */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #F3F9FB;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            margin: 0 15px;
+            color: #00A2CE;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #00BBD0;
+            text-decoration: underline;
+        }
+
+        /* Section principale */
+        .main.reservation-page {
+            padding: 50px 20px;
+            min-height: calc(100vh - 140px);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .confirmation-header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+
+        .confirmation-header h1 {
+            font-size: 2rem;
+            color: #00A2CE;
+            margin-bottom: 10px;
+        }
+
+        .confirmation-header p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .detail-card {
+            background: #f7f9fc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .detail-card h2 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            color: #333;
+            border-bottom: 2px solid #00A2CE;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .detail-card p {
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .owner-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .owner-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #00A2CE;
+        }
+
+        /* Section rendez-vous */
+        .appointment-section {
+            background: #f7f9fc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .appointment-section h2 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            color: #333;
+            border-bottom: 2px solid #00A2CE;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .appointment-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .appointment-form label {
+            flex-basis: 100%;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .appointment-form input {
+            flex-basis: calc(50% - 10px);
+            padding: 10px;
+            border: 1px solid #00A2CE;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .appointment-form button {
+            flex-basis: 100%;
+            margin-top: 10px;
+            padding: 12px 20px;
+            background: #00A2CE;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .appointment-form button:hover {
+            background: #00BBD0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #00A2CE;
+            color: white;
+            margin-top: 30px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            border: 1px solid #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: #fff;
+            color: #333;
+        }
+
+        @media (max-width: 600px) {
+            .appointment-form input {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="photo/studar logo LONG.png" alt="Étudiant Logement" class="logo-img">
+        </a>
+        <nav>
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="#" class="nav-link">OFFER</a>
+            <a href="#" class="nav-link">CONTACT US</a>
+        </nav>
+    </header>
+
+    <!-- SECTION PRINCIPALE -->
+    <section class="main reservation-page">
+        <div class="container">
+            <!-- En-tête de confirmation -->
+            <div class="confirmation-header">
+                <h1>Réservation Confirmée</h1>
+                <p>Référence de réservation : <strong>#ABC123456</strong></p>
+            </div>
+            
+            <!-- Détails du propriétaire et du logement -->
+            <div class="details-grid">
+                <!-- Détails du propriétaire -->
+                <div class="detail-card">
+                    <h2>Propriétaire</h2>
+                    <div class="owner-card">
+                        <img src="photo/image.png" alt="Propriétaire">
+                        <div>
+                            <p><strong>Nom:</strong> Jean Dupont</p>
+                            <p><strong>Téléphone:</strong> +212 6 45 21 63 48</p>
+                            <p><strong>Email:</strong> mohamedt@example.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Détails du logement -->
+                <div class="detail-card">
+                    <h2>Logement</h2>
+                    <p><strong>Titre:</strong> Appartement Moderne au Centre</p>
+                    <p><strong>Adresse:</strong> 123 Rue de l'Exemple, Casablanca, Maroc</p>
+                    <p><strong>Prix:</strong> 3500 MAD / mois</p>
+                    <p><strong>Paiement:</strong> Paiement mensuel avec dépôt de garantie requis</p>
+                </div>
+            </div>
+            
+            <!-- Section de planification de rendez-vous -->
+            <div class="appointment-section">
+                <h2>Planifier un Rendez-vous</h2>
+                <form id="appointmentForm" class="appointment-form">
+                    <label for="appointmentDate">Date du rendez-vous :</label>
+                    <input type="date" id="appointmentDate" name="appointmentDate" required>
+                    
+                    <label for="appointmentTime">Heure du rendez-vous :</label>
+                    <input type="time" id="appointmentTime" name="appointmentTime" required>
+                    
+                    <button type="submit">Confirmer le Rendez-vous</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Suivez-nous :</p>
+        <div class="social-icons">
+            <a href="#" class="facebook">Facebook</a>
+            <a href="#" class="instagram">Instagram</a>
+            <a href="https://wa.me/123456789" class="whatsapp">WhatsApp</a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('appointmentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Votre rendez-vous a été confirmé !');
+        });
+    </script>
+</body>
+</html>

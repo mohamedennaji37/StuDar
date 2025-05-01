@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détails du Logement - Version Plus Grande</title>
+  <style>
+    /* ----- HEADER ET FOOTER ----- */
+      /* Header */
+      header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            margin: 0 15px;
+            color: #00A2CE;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #00BBD0;
+            text-decoration: underline;
+        }
+    .signup, .signin {
+      font-size: 16px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      color: white;
+      margin-left: 10px;
+    }
+    .signup {
+            background: #00A2CE;
+            color: white;
+        }
+
+        .signin {
+            background: #00BBD0;
+            color: white;
+        }
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #87CEEB;
+      color: white;
+      font-size: 18px; /* Police plus grande dans le footer */
+    }
+    .social-icons a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .social-icons a:hover {
+      text-decoration: underline;
+    }
+    
+    /* ----- CONTENEUR PRINCIPAL ----- */
+    .details-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* ----- GALERIE D'IMAGES (6 PHOTOS) ----- */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    .gallery img {
+      width: 100%;
+      height: 200px; /* Hauteur plus grande */
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    
+    /* ----- SECTION DES DÉTAILS ----- */
+    .details-section {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .description {
+      flex: 1;
+      min-width: 300px;
+    }
+    .description h2 {
+      margin-bottom: 15px;
+      color: #87CEEB;
+      font-size: 26px; /* Titre plus grand */
+    }
+    /* Police plus grande pour la description */
+    .description p {
+      font-size: 20px;
+      line-height: 1.6;
+    }
+    
+    /* Tous les "filtres" ou caractéristiques dans la même ligne */
+    .features {
+      margin-top: 15px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      font-size: 18px; /* Icônes et texte plus grands */
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #e6f2ff;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    
+    /* ----- LE RECTANGLE DE DROITE (INFO-BOX) ----- */
+    .info-box {
+      flex: 0 0 300px; /* Largeur plus grande */
+      max-width: 300px;
+      background: #f0f0f0;
+      border-radius: 10px;
+      padding: 15px;  /* Plus de padding pour un aspect plus large */
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    /* ----- GRAND RECTANGLE (VERTICAL) ----- */
+    .big-rectangle {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .small-rectangle {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 12px; /* Plus de padding pour un rendu plus grand */
+      text-align: center;
+      font-size: 18px; /* Police plus grande */
+    }
+    
+    /* Bloc : Prix (en haut) */
+    .small-rectangle.price {
+      font-weight: bold;
+      font-size: 22px; /* Prix plus grand */
+      color: #333;
+      background: #e6f2ff;
+      margin-bottom: 5px;
+    }
+    
+    /* Bloc : Occupancy (organisation horizontale) */
+    .small-rectangle.occupancy {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .occupancy-info {
+      font-weight: bold;
+    }
+    .occupancy-button {
+      font-size: 16px;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+    }
+    /* Occupancy complète (4/4) = rouge, sinon vert */
+    .occupancy-button.full {
+      background: red;
+    }
+    .occupancy-button.available {
+      background: green;
+    }
+    
+    /* Bloc : Réservation (label + bouton en colonne) */
+    .small-rectangle.reservation {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .reservation-label {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .reservation-btn {
+      font-size: 16px;
+      padding: 12px 20px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .reservation-btn:hover {
+      background: #0056b3;
+    }
+    a{
+      text-align: none;
+      color: white;
+    }
+    /* ----- RESPONSIVE ----- */
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .details-section {
+        flex-direction: column;
+      }
+      .info-box {
+        flex: 1;
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header (identique) -->
+  <header>
+    <a href="index.html" class="logo">
+        <img src="photo/studar logo LONG.png" alt="Étudiant Logement" class="logo-img">
+    </a>
+        
+    <nav>
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="offer.html" class="nav-link">OFFER</a>
+        <a href="#" class="nav-link">CONTACT US</a>
+        <a href="choisirTypeSinup.html"> <button class="signup">Sign Up</button></a>
+        <a href="choisirTypeSinin.html"> <button class="signin">Sign In</button></a>
+    </nav>
+</header>
+  
+  <!-- Contenu principal de la page de détails -->
+  <div class="details-container">
+    <!-- Galerie d'images (6 photos) : reliées à l'offre sélectionnée -->
+    <div class="gallery" id="gallery">
+    </div>
+    
+    <!-- Section de détails (description + rectangle de droite) -->
+    <div class="details-section">
+      
+      <!-- Description du logement -->
+      <div class="description">
+        <h2>Description du Logement</h2>
+        <p id="description_log">
+        </p>
+        
+        <!-- Une seule ligne pour Meublé, Wi-Fi, Chauffage, Ville, Distance, Durée, Chambres -->
+         <div>
+          <div id="logement-details" class="features"></div>
+        </div>
+      </div>
+      
+      <!-- Le rectangle de droite (plus grand, images/boutons plus gros) -->
+      <div class="info-box">
+        <div class="big-rectangle">
+          <!-- 1) Prix -->
+          <div class="small-rectangle price" id="prix-logement">
+            <!-- 800€/mois -->
+          </div>
+          
+          <!-- 2) Occupancy -->
+          <div class="small-rectangle occupancy">
+            <span class="occupancy-info">Occupancy:</span>
+            <button class="occupancy-button available" id="occupancy-button">0/4</button>
+          </div>
+          
+          <div class="small-rectangle reservation">
+            <div class="reservation-label">Réservation</div>
+            <button class="reservation-btn" id="reservation-btn"><a href="infoEtudiant.html">Réserver</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const logementData = JSON.parse(localStorage.getItem('selectedLogement'));
+        console.log('Retrieved logementData:', logementData); // Debugging log
+    
+        if (logementData) {
+          const logementDetailsDiv = document.getElementById('logement-details');
+          logementDetailsDiv.innerHTML = `
+            <div class="feature-item">📶 Wi-Fi :</strong> ${logementData.WIFI}</div>
+            <div class="feature-item">♨️ Chauffage :</strong> ${logementData.Chauffage}</div>
+            <div class="feature-item"><strong>Ville :</strong> ${logementData.ville}</div>
+            <div class="feature-item"><strong>Distance :</strong> ${logementData.distance} min</div>
+            <div class="feature-item"><strong>Durée :</strong> ${logementData.duree} mois</div>
+            <div class="feature-item"><strong>Chambres :</strong> ${logementData.chambres}</div>
+          `;
+          const prixLogementDiv = document.getElementById('prix-logement');
+          if (prixLogementDiv) {
+            prixLogementDiv.textContent = `${logementData.prix}€/mois`;
+          }
+          const descriptionDiv = document.getElementById('description_log');
+          if (descriptionDiv) {
+            descriptionDiv.textContent = logementData.description;
+          } else {
+            console.error('Element with id description_log not found');
+          }
+          const gallery = document.getElementById('gallery');
+        if (logementData.image_url) {
+          console.log('Image URLs:', logementData.image_url); // Log the URLs
+          let imagesHtml = '';
+          for (let i = 0; i < logementData.image_url.length; i++) {
+            if (logementData.image_url[i]) {
+              imagesHtml += `<img src="${logementData.image_url[i]}" alt="Logement Image ${i + 1}">`;
+            }
+          }
+          gallery.innerHTML = imagesHtml;
+          }
+        }
+        const occupancyButton = document.getElementById('occupancy-button');
+        const reservationButton = document.getElementById('reservation-btn');
+        let currentOccupancy = 0;
+        const maxOccupancy = 4;
+        const logementId = `${logementData.logement_id}`; // Replace with actual logement_id
+        // etudiantId = '19c237bf-6b40-42b4-90fb-b1e7597ccc44'; // Replace with actual etudiant_id
+
+        reservationButton.addEventListener('click', async () => {
+  if (currentOccupancy < maxOccupancy) {
+    currentOccupancy++;
+    occupancyButton.textContent = `${currentOccupancy}/${maxOccupancy}`;
+    
+    // Send reservation request to the backend
+    const response = await fetch('/offre/reserve', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ etudiant_id: etudiantId, logement_id: logementId }),
+    });
+
+    if (response.ok) {
+      console.log('Reservation successful');
+    } else {
+      console.error('Reservation failed');
+    }
+  } else {
+    alert('Occupancy is full!');
+  }
+});
+      });
+    </script>
+  </div>
+  
+  <!-- Footer (identique) -->
+  <footer>
+    <p>Suivez-nous :</p>
+    <div class="social-icons">
+      <a href="#" class="facebook">Facebook</a>
+      <a href="#" class="instagram">Instagram</a>
+      <a href="https://wa.me/123456789" class="whatsapp">WhatsApp</a>
+    </div>
+  </footer>
+  
+
+</body>
+</html>

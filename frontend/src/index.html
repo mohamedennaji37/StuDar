@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Étudiant Logement</title>
+    <script defer src="main.js"></script>
+    <style>
+        /* General Style */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #F3F9FB;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            margin: 0 15px;
+            color: #00A2CE;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #00BBD0;
+            text-decoration: underline;
+        }
+
+        .search {
+            padding: 8px;
+            border: 1px solid #00BBD0;
+            border-radius: 4px;
+            background: white;
+            color: #333;
+        }
+
+        /* Buttons */
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-weight: bold;
+        }
+
+        .signup {
+            background: #00A2CE;
+            color: white;
+        }
+
+        .signin {
+            background: #00BBD0;
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #5FE3A4;
+        }
+
+        /* Main Section */
+        .main {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 50px;
+            background: #E0F7FA;
+        }
+
+        .content {
+            max-width: 500px;
+        }
+
+        .content h1 {
+            color: #00A2CE;
+        }
+
+        .explore {
+            background: #5FE3A4;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .explore:hover {
+            background: #00BBD0;
+        }
+
+        .image img {
+            width: 350px;
+            border-radius: 10px;
+        }
+
+        /* About Section */
+        .about {
+            text-align: center;
+            padding: 50px;
+            background: #F3F9FB;
+        }
+
+        /* Offers */
+        .offers {
+            text-align: center;
+            padding: 50px;
+            font-size: 17px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            border-left: 5px solid #ffffff;
+        }
+
+        .offer-card:hover {
+            transform: scale(1.05);
+            border-left: 5px solid #00A2CE;
+        }
+
+        .offer-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .price {
+            font-size: 18px;
+            color: #00A2CE;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #00A2CE;
+            color: white;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .social-icons a:hover {
+            color: #5FE3A4;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="photo/studar logo LONG.png" alt="Étudiant Logement" class="logo-img">
+        </a>
+            
+        <nav>
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="offer.html" class="nav-link">OFFER</a>
+            <a href="#" class="nav-link">CONTACT US</a>
+            <input type="text" placeholder="Rechercher un logement..." class="search">
+            <a href="choisirTypeSinup.html"> <button class="signup">Sign Up</button></a>
+            <a href="choisirTypeSinin.html"> <button class="signin">Sign In</button></a>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <section class="main">
+        <div class="content">
+            <h1>Découvrez le logement idéal pour vos études !</h1>
+            <p>Nous vous aidons à trouver des logements confortables et abordables pour votre période universitaire.</p>
+            <a href="offer.html"><button class="explore">Explorer les offres</button></a>
+        </div>
+        <div class="image">
+            <img src="./photo/image.png" alt="Logement étudiant">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <h2>Pourquoi choisir Étudiant Logement ?</h2>
+        <p>Nous offrons une large sélection de logements adaptés aux étudiants, avec des prix abordables et des emplacements stratégiques proches des universités.</p>
+    </section>
+
+    <!-- Offers Section -->
+    <section class="offers">
+        <h2>Nos Meilleures Offres</h2>
+        <div class="grid-container">
+            <div class="offer-card">
+                <img src="./photo/logement1.jpg" alt="Studio à Casablanca">
+                <h3>Studio à Casablanca</h3>
+                <p>Un studio moderne proche de l'université.</p>
+                <p class="price">2 500 MAD / mois</p>
+            </div>
+            <div class="offer-card">
+                <img src="./photo/logement6.jpg" alt="Appartement à Rabat">
+                <h3>Appartement à Rabat</h3>
+                <p>Appartement spacieux avec 2 chambres.</p>
+                <p class="price">3 800 MAD / mois</p>
+            </div>
+            <div class="offer-card">
+                <img src="./photo/logement3.jpg" alt="Chambre en colocation">
+                <h3>Chambre en colocation</h3>
+                <p>Une chambre partagée avec Wi-Fi inclus.</p>
+                <p class="price">1 800 MAD / mois</p>
+            </div>
+            <div class="offer-card">
+                <img src="./photo/logement5.jpg" alt="Studio à Marrakech">
+                <h3>Studio à Marrakech</h3>
+                <p>Proche des transports en commun.</p>
+                <p class="price">2 200 MAD / mois</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Suivez-nous :</p>
+        <div class="social-icons">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="https://wa.me/123456789">WhatsApp</a>
+        </div>
+    </footer>
+
+</body>
+</html>

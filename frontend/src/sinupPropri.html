@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Propriétaire</title>
+    <style>
+        /* Style général */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            color: #6B4F4F;
+        }
+
+        /* Header */
+         /* Header */
+         header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            margin: 0 15px;
+            color: #00A2CE;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #00BBD0;
+            text-decoration: underline;
+        }
+
+        .search {
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            margin: 0 10px;
+        }
+
+        /* Section inscription */
+        .signup-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            flex-direction: column;
+        }
+
+        .signup-form {
+            width: 50%;
+            border: 2px solid #00A2CE;
+            border-radius: 10px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #000000;
+            border-radius: 4px;
+        }
+
+        /* Styles pour afficher le message d'erreur près du label */
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+
+        .error {
+            border: 1px solid red;
+        }
+        .signup {
+            background: #00A2CE;
+            color: white;
+        }
+
+        .signin {
+            background: #00BBD0;
+            color: white;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-weight: bold;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background: #5FE3A4;
+        }
+        .progress-bar {
+            width: 100%;
+            background: #f3f3f3;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .progress {
+            width: 0%;
+            height: 10px;
+            background: #00BBD0;
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .button-group button.previous {
+            background: #ccc;
+            color: #36a1cf;
+        }
+
+        .button-group button.next {
+            background: #5FE3A4;
+            color: white;
+        }
+
+        .button-group button.finish {
+            background: #5FE3A4;
+            color: white;
+        }
+
+       
+
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-weight: bold;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background: #5FE3A4;
+        }
+
+        /* Pied de page */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #87CEEB;
+            color: white;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .social-icons a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="photo/studar logo LONG.png" alt="Étudiant Logement" class="logo-img">
+        </a>
+            
+        <nav>
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="offer.html" class="nav-link">OFFER</a>
+            <a href="#" class="nav-link">CONTACT US</a>
+           
+            <a href="choisirTypeSinup.html"> <button class="signup">Sign Up</button></a>
+            <a href="choisirTypeSinin.html"> <button class="signin">Sign In</button></a>
+        </nav>
+    </header>
+
+    <!-- Section Inscription -->
+    <section class="signup-section">
+        <div class="signup-form">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <!-- Étape 1 -->
+            <div class="form-step active" id="step1">
+                <div class="form-group">
+                    <label for="firstname">Prénom</label>
+                    <input type="text" id="firstname" name="firstname" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Nom</label>
+                    <input type="text" id="lastname" name="lastname" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="efonds">Numero</label>
+                    <input type="text" id="efonds" name="efonds" required>
+                </div>
+                <div class="form-group">
+                    <label for="birthdate">Date de naissance</label>
+                    <input type="date" id="birthdate" name="birthdate" required>
+                </div>
+                <div class="form-group">
+                    <label for="cin">CIN (Upload)</label>
+                    <input type="file" id="cin" name="cin" required>
+                </div>
+                <div class="button-group">
+                    <button class="next" onclick="nextStep(2)">Suivant</button>
+                </div>
+            </div>
+            <!-- Étape 2 -->
+            <div class="form-step" id="step2">
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkpassword">Confirmer le mot de passe</label>
+                    <input type="password" id="checkpassword" name="checkpassword" required>
+                </div>
+                <div class="button-group">
+                    <button class="previous" onclick="previousStep(1)">Précédent</button>
+                    <button class="finish" onclick="finish(event)">Terminer</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>Suivez-nous :</p>
+        <div class="social-icons">
+            <a href="#" class="facebook">Facebook</a>
+            <a href="#" class="instagram">Instagram</a>
+            <a href="https://wa.me/123456789" class="whatsapp">WhatsApp</a>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+
+        // Passe à l'étape suivante si tous les champs de l'étape actuelle sont valides
+        function nextStep(step) {
+            if (!validateStep(currentStep)) {
+                return;
+            }
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${step}`).classList.add('active');
+            currentStep = step;
+            updateProgress();
+        }
+
+        // Revient à l'étape précédente (sans validation)
+        function previousStep(step) {
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${step}`).classList.add('active');
+            currentStep = step;
+            updateProgress();
+        }
+
+        // Termine l'inscription si l'étape actuelle est valide
+        async function finish(event) {
+            event.preventDefault();
+
+            const prenom_pro = document.getElementById('firstname').value;
+            const nom_pro = document.getElementById('lastname').value;
+            const email_pro = document.getElementById('email').value;
+            const numero_pro = document.getElementById('efonds').value;
+            const date_naissance_pro = document.getElementById('birthdate').value;
+            const password = document.getElementById('password').value;
+            const checkpassword = document.getElementById('checkpassword').value;
+            const cinFile = document.getElementById('cin').files[0];  // Récupération du fichier CIN
+
+            if (password !== checkpassword) {
+                alert('Les mots de passe ne correspondent pas !');
+                return;
+            }
+
+            // Préparer les données pour l'envoi, y compris le fichier CIN
+            const formData = new FormData();
+            formData.append('prenom_pro', prenom_pro);
+            formData.append('nom_pro', nom_pro);
+            formData.append('email_pro', email_pro);
+            formData.append('numero_pro', numero_pro);
+            formData.append('date_naissance_pro', date_naissance_pro);
+            formData.append('password', password);
+            formData.append('cin', cinFile);  // Ajout du fichier
+
+            // Envoyer les données avec fetch
+            fetch('/signup/signupProp', {
+                method: 'POST',
+                body: formData  // Pas besoin de définir Content-Type, FormData le fait automatiquement
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Erreur lors de l\'inscription : ' + data.error);
+                } else {
+                    alert('Inscription réussie !');
+                    window.location.href = '/propri_home.html';
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur s\'est produite lors de l\'inscription.');
+            });
+        };
+
+
+        // Met à jour la barre de progression
+        function updateProgress() {
+            document.querySelector('.progress').style.width = (currentStep === 1 ? '50%' : '100%');
+        }
+
+        // Vérifie que tous les champs requis de l'étape sont renseignés
+        function validateStep(step) {
+            const stepElement = document.getElementById(`step${step}`);
+            const inputs = stepElement.querySelectorAll('input[required]');
+            let valid = true;
+            inputs.forEach(input => {
+                removeErrorMessage(input);
+                if (input.type === "file") {
+                    if (input.files.length === 0) {
+                        valid = false;
+                        showErrorMessage(input, "Ce champ est requis.");
+                    }
+                } else {
+                    if (!input.value.trim()) {
+                        valid = false;
+                        showErrorMessage(input, "Ce champ est requis.");
+                    }
+                }
+            });
+            return valid;
+        }
+
+        // Affiche un message d'erreur juste après le label du champ
+        function showErrorMessage(input, message) {
+            const parent = input.parentNode;
+            const label = parent.querySelector('label');
+            let errorSpan = label.nextElementSibling;
+            if (!errorSpan || !errorSpan.classList.contains('error-message')) {
+                errorSpan = document.createElement('span');
+                errorSpan.className = 'error-message';
+                label.insertAdjacentElement('afterend', errorSpan);
+            }
+            errorSpan.textContent = message;
+            input.classList.add("error");
+        }
+
+        // Supprime le message d'erreur du champ
+        function removeErrorMessage(input) {
+            const parent = input.parentNode;
+            const label = parent.querySelector('label');
+            const errorSpan = label.nextElementSibling;
+            if (errorSpan && errorSpan.classList.contains('error-message')) {
+                errorSpan.textContent = "";
+            }
+            input.classList.remove("error");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Détails des Rendez-vous - Propriétaire</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="main.js"></script>
+  
+  <!-- Import de la police Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" 
+    rel="stylesheet"
+  >
+  
+  <!-- Styles spécifiques -->
+  <style>
+    /* Réinitialisation */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafb;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    .nav-link {
+            margin: 0 15px;
+            color: #00A2CE;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+    .nav-link:hover {
+            color: #00BBD0;
+            text-decoration: underline;
+        }
+    .main {
+      padding: 50px 20px;
+      min-height: calc(100vh - 140px);
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .header-section {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .header-section h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .reservations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .reservation-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .reservation-card:hover {
+      transform: translateY(-5px);
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    .card-header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #1e90ff; /* Changed border color to match header */
+    }
+    .card-header .info {
+      font-size: 0.95rem;
+    }
+    .card-header .info p {
+      margin-bottom: 5px;
+    }
+    .card-body {
+      display: none;
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+    }
+    .card-body p {
+      margin-bottom: 10px;
+      color: #555;
+      font-size: 0.95rem;
+    }
+    .confirm-button {
+      padding: 10px 20px;
+      background: #28a745; /* Green button color */
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 0.95rem;
+    }
+    .confirm-button:hover {
+      background: #218838; /* Darker green on hover */
+    }
+    .refuse-button {
+      padding: 10px 20px;
+      background: #dc3545; /* Red button color */
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 0.95rem;
+      margin-left: 10px;
+    }
+    .refuse-button:hover {
+      background: #c82333; /* Darker red on hover */
+    }
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #1e90ff; /* Matching footer background */
+      color: white;
+      margin-top: 30px;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .social-icons a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      border: 1px solid #fff;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .social-icons a:hover {
+      background: #fff;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">
+      <img src="photo/studar logo LONG.png" alt="Étudiant Logement" class="logo-img">
+    </a>
+  </a>
+    <nav>
+      <a href="index.html" class="nav-link">HOME</a>
+      <a href="#" class="nav-link">OFFER</a>
+      <a href="#" class="nav-link">CONTACT US</a>
+    </nav>
+  </header>
+
+  <!-- SECTION PRINCIPALE -->
+  <section class="main">
+    <div class="container">
+      <div class="header-section">
+        <h1>Détails des Rendez-vous</h1>
+        <p>Cliquez sur une réservation pour afficher les détails et choisir une action.</p>
+      </div>
+      
+      <div class="reservations-grid">
+        <!-- Carte de réservation 1 -->
+        <div class="reservation-card" data-student="Alice Martin">
+          <div class="card-header">
+            <img src="photo/ettu.png" alt="Photo d'Alice">
+            <div class="info">
+              <p><strong>Nom:</strong> Alice Martin</p>
+              <p><strong>Email:</strong> alice.martin@example.com</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>Téléphone:</strong> +212 6 98 76 54 32</p>
+            <p><strong>Date proposée:</strong> 2025-03-10</p>
+            <p><strong>Heure proposée:</strong> 14:30</p>
+            <button class="confirm-button" onclick="confirmRdv(event, 'Alice Martin')">Confirmer le Rendez-vous</button>
+            <button class="refuse-button" onclick="refuseRdv(event, 'Alice Martin')">Refuser le Rendez-vous</button>
+          </div>
+        </div>
+        
+        <!-- Carte de réservation 2 -->
+        <div class="reservation-card" data-student="Bob Dupont">
+          <div class="card-header">
+            <img src="photo/ettu.png" alt="Photo de Bob">
+            <div class="info">
+              <p><strong>Nom:</strong> Bob Dupont</p>
+              <p><strong>Email:</strong> bob.dupont@example.com</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>Téléphone:</strong> +212 6 12 34 56 78</p>
+            <p><strong>Date proposée:</strong> 2025-03-11</p>
+            <p><strong>Heure proposée:</strong> 10:00</p>
+            <button class="confirm-button" onclick="confirmRdv(event, 'Bob Dupont')">Confirmer le Rendez-vous</button>
+            <button class="refuse-button" onclick="refuseRdv(event, 'Bob Dupont')">Refuser le Rendez-vous</button>
+          </div>
+        </div>
+        
+        <!-- Ajoutez ici d'autres cartes selon le nombre d'étudiants -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Suivez-nous :</p>
+    <div class="social-icons">
+      <a href="#" class="facebook">Facebook</a>
+      <a href="#" class="instagram">Instagram</a>
+      <a href="https://wa.me/123456789" class="whatsapp">WhatsApp</a>
+    </div>
+  </footer>
+
+  <script>
+    // Permet d'afficher/cacher les détails en cliquant sur la carte
+    const reservationCards = document.querySelectorAll('.reservation-card');
+    reservationCards.forEach(card => {
+      card.addEventListener('click', function(e) {
+        // Empêche l'action lorsque l'utilisateur clique sur un bouton
+        if(e.target.classList.contains('confirm-button') || e.target.classList.contains('refuse-button')) return;
+        const body = this.querySelector('.card-body');
+        body.style.display = (body.style.display === 'block') ? 'none' : 'block';
+      });
+    });
+    
+    function confirmRdv(e, studentName) {
+      e.stopPropagation();
+      alert('Le rendez-vous pour ' + studentName + ' a été confirmé.');
+      // Ajouter ici la logique d'envoi au serveur
+    }
+    
+    function refuseRdv(e, studentName) {
+      e.stopPropagation();
+      alert('Le rendez-vous pour ' + studentName + ' a été refusé.');
+      // Ajouter ici la logique d'envoi au serveur
+    }
+  </script>
+</body>
+</html>

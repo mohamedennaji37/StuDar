@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choix Utilisateur</title>
+    <style>
+        /* Style général */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #F3F9FB;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            margin: 0 15px;
+            color: #00A2CE;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #00BBD0;
+            text-decoration: underline;
+        }
+
+        .search {
+            padding: 8px;
+            border: 1px solid #00BBD0;
+            border-radius: 4px;
+            background: white;
+            color: #333;
+        }
+
+        /* Section choix utilisateur */
+        .user-choice {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .choice-container {
+            display: flex;
+            width: 60%;
+            border: 2px solid #00A2CE;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .choice {
+            flex: 1;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .choice img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .choice h2 {
+            margin: 15px 0;
+            color: #00A2CE;
+        }
+
+        .choice p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .student {
+            background: #E0F7FA;
+        }
+
+        .owner {
+            background: #F3F9FB;
+        }
+
+        .choice button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .student button {
+            background: #00A2CE;
+            color: white;
+        }
+
+        .owner button {
+            background: #00BBD0;
+            color: white;
+        }
+
+        .choice button:hover {
+            transform: scale(1.1);
+        }
+
+        .signup {
+            background: #00A2CE;
+            color: white;
+        }
+
+        .signin {
+            background: #00BBD0;
+            color: white;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #5FE3A4;
+        }
+
+        /* Pied de page */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #00A2CE;
+            color: white;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .social-icons a:hover {
+            color: #5FE3A4;
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="photo/studar logo LONG.png" alt="Étudiant Logement" class="logo-img">
+        </a>
+        <nav>
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="#" class="nav-link">OFFER</a>
+            <a href="#" class="nav-link">CONTACT US</a>
+            <input type="text" placeholder="Rechercher un logement..." class="search">
+            <a href="choisirTypeSinup.html"><button class="signup">Sign Up</button></a>
+            <a href="choisirTypeSinin.html"><button class="signin">Sign In</button></a>
+        </nav>
+    </header>
+
+    <!-- Section Choix -->
+    <section class="user-choice">
+        <div class="choice-container">
+            <div class="choice student">
+                <img src="photo/ettu.png" alt="Étudiant">
+                <h2>Je suis Étudiant</h2>
+                <p>Accédez à une large sélection de logements adaptés aux étudiants.</p>
+                <a href="sinupEtudiant.html"><button>Sign Up</button></a>
+            </div>
+            <div class="choice owner">
+                <img src="photo/pro.png" alt="Propriétaire">
+                <h2>Je suis Propriétaire</h2>
+                <p>Publiez vos offres de location pour les étudiants.</p>
+                <a href="sinupPropri.html"><button>Sign Up</button></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>Suivez-nous :</p>
+        <div class="social-icons">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="https://wa.me/123456789">WhatsApp</a>
+        </div>
+    </footer>
+</body>
+</html>

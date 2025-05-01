@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestion des Maisons Étudiantes</title>
+
+  <!-- Styles intégrés -->
+  <style>
+    /* RESET & POLICE */
+    * {
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: #f3f5f9;
+      color: #333;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #007BFF;
+      color: white;
+      padding: 15px 30px;
+    }
+    .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+    nav a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* CONTENEUR PRINCIPAL */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 30px auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* BARRE DE TRI */
+    .sort-bar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .sort-bar select {
+      padding: 8px;
+      margin-right: 10px;
+    }
+    .sort-bar button {
+      padding: 8px 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .sort-bar button:hover {
+      background: #0056b3;
+    }
+
+    /* ACTIONS */
+    .actions {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .add-home-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: 0.3s;
+    }
+    .add-home-btn:hover {
+      background: #218838;
+    }
+
+    /* LISTE DES MAISONS */
+    .house-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .house-card {
+      width: 320px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+      position: relative;
+    }
+    .house-card:hover {
+      transform: scale(1.02);
+    }
+    .house-images {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 10px;
+      overflow-x: auto; /* scroll horizontal si trop de photos */
+    }
+    .house-images img {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 5px;
+      flex-shrink: 0; /* pas de réduction forcée */
+    }
+    .house-card h3 {
+      margin: 10px 0;
+      color: #007BFF;
+    }
+    .house-card p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 6px;
+    }
+    .house-card .price {
+      font-size: 16px;
+      font-weight: bold;
+      color: #28a745;
+      margin-top: 10px;
+    }
+    .house-card .card-actions {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-actions button {
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+    .edit-btn {
+      background: #ffc107;
+      color: #333;
+    }
+    .edit-btn:hover {
+      background: #e0a800;
+    }
+    .delete-btn {
+      background: #dc3545;
+      color: #fff;
+    }
+    .delete-btn:hover {
+      background: #c82333;
+    }
+
+    /* Icône / Indicateur du nombre de réservations */
+    .reservation-count {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 420px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+    }
+    .modal h2 {
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .modal input, .modal select, .modal textarea {
+      width: 100%;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .modal .modal-actions {
+      margin-top: 10px;
+      text-align: right;
+    }
+    .modal .modal-actions button {
+      background: #007BFF;
+      color: white;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .modal .modal-actions button:hover {
+      background: #0056b3;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #007BFF;
+      color: white;
+      margin-top: 40px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .house-card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">
+      <img src="photo/studar logo LONG.png" alt="Étudiant Logement" class="logo-img">
+  </a>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="addHomeCheckhome.html">Mes Maisons</a>
+      <a href="infoEtudiant.html">Mes reservation</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- SECTION PRINCIPALE -->
+  <div class="container">
+    <h1>Gérez vos maisons</h1>
+
+    <!-- Barre de tri (avec distance) -->
+    <div class="sort-bar">
+      <select id="sortCriteria">
+        <option value="priceAsc">Prix croissant</option>
+        <option value="priceDesc">Prix décroissant</option>
+        <option value="cityAsc">Ville (A-Z)</option>
+        <option value="cityDesc">Ville (Z-A)</option>
+        <option value="distanceAsc">Distance croissante</option>
+        <option value="distanceDesc">Distance décroissante</option>
+      </select>
+      <button onclick="sortHouses()">Trier</button>
+    </div>
+
+    <!-- Bouton "Ajouter une maison" -->
+    <div class="actions">
+      <button class="add-home-btn" onclick="openAddModal()">➕ Ajouter une maison</button>
+    </div>
+
+    <!-- Liste des maisons -->
+    <div class="house-list" id="houseList"></div>
+  </div>
+
+  <!-- MODAL AJOUT / MODIFICATION -->
+  <div class="modal" id="houseModal">
+    <h2 id="modalTitle">Ajouter une maison</h2>
+
+    <!-- Champs du formulaire -->
+    <input type="text" id="houseName" placeholder="Nom de la maison" />
+    <textarea id="houseDesc" placeholder="Description"></textarea>
+    <input type="number" id="houseDuration" placeholder="Durée (en mois)" />
+
+    <!-- Photos multiples (jusqu'à 7) -->
+    
+    <input type="file" name="logement_url" id="houseImages1"  accept="image/*" />
+    <input type="file" name="url1" id="houseImages2"  accept="image/*" />
+    <input type="file" name="url2" id="houseImages3"  accept="image/*" />
+    <input type="file" name="url3" id="houseImages4"  accept="image/*" />
+    <input type="file" name="url4" id="houseImages5"  accept="image/*" />
+    <input type="file" name="url5" id="houseImages6"  accept="image/*" />
+    <input type="file" name="url6" id="houseImages7"  accept="image/*" />
+
+
+    <select id="houseCity">
+      <option>Casablanca</option>
+      <option>Rabat</option>
+      <option>Marrakech</option>
+      <option>Tanger</option>
+      <option>Fès</option>
+      <option>Guelmim</option>
+    </select>
+    
+    <input type="number" id="housePrice" placeholder="Prix/mois (MAD)" />
+    
+    <select id="houseWifi">
+      <option value="Oui">WiFi - Oui</option>
+      <option value="Non">WiFi - Non</option>
+    </select>
+    
+    <select id="houseHeating">
+      <option value="Oui">Chauffage - Oui</option>
+      <option value="Non">Chauffage - Non</option>
+    </select>
+    
+    
+    <input type="number" id="houseRooms" placeholder="Nombre de chambres" />
+    
+    <!-- Ajout de la distance (en km) -->
+    <input type="number" id="houseDistance" placeholder="Distance (en km)" />
+
+    <!-- Boutons d'action -->
+    <div class="modal-actions">
+      <button onclick="closeModal()">Annuler</button>
+      <button id="saveHouseBtn" onclick="saveHouse(event)">Enregistrer</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Suivez-nous sur nos réseaux :</p>
+    <p>© 2025 Étudiant Logement</p>
+  </footer>
+
+  <!-- SCRIPT PRINCIPAL -->
+  <script>
+let houses = []; // Assurez-vous que cette variable est définie globalement
+
+// Fonction pour charger les maisons
+async function fetchHouses() {
+    const token = localStorage.getItem('token'); // Get the token from local storage
+
+    if (!token) {
+        console.error('No token found');
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/logements', {
+            headers: {
+                'Authorization': `Bearer ${token}` // Include the token in the Authorization header
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        houses = await response.json();
+        displayHouses(houses); // Affichez les maisons après les avoir chargées
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
+}
+
+// Appelez fetchHouses pour charger les données au démarrage
+document.addEventListener('DOMContentLoaded', function() {
+    fetchHouses();
+});
+
+    function displayHouses(houses) {
+    const houseList = document.getElementById('houseList');
+    houseList.innerHTML = '';
+
+    if (!houses || houses.length === 0) {
+        houseList.innerHTML = '<p>Aucune maison à afficher.</p>'; // Message when no houses are available
+        return;
+    }
+
+    houses.forEach((house, index) => {
+        const imagesArray = [
+            house.logement_url,
+            house.url1,
+            house.url2,
+            house.url3,
+            house.url4,
+            house.url5,
+            house.url6
+        ].filter(url => url); // Filter out null or undefined URLs
+
+        const imagesHtml = imagesArray
+            .map(img => `<img src="${img}" alt="Maison" />`)
+            .join('');
+
+        houseList.innerHTML += `
+            <div class="house-card">
+                <div class="house-images">${imagesHtml}</div>
+                <h3>${house.nom_dep}</h3>
+                <p>${house.Description_log}</p>
+                <p>Ville : <strong>${house.ville}</strong></p>
+                <p>Distance : <strong>${house.distance || 0} km</strong></p>
+                <p> Durée : <strong>${house.duree} mois</strong></p>
+                <p>WiFi : <strong>${house.WIFI}</strong> | Chauffage : <strong>${house.Chauffage}</strong></p>
+                <p>Chambres : <strong>${house.chambre}</strong></p>
+                <p class="price">${house.prix} MAD / mois</p>
+                <div class="card-actions">
+                  <span class="reservation-count">👥 ${house.reservations || 0}</span>
+                  <div>
+                    <button class="edit-btn" onclick="updateHouse('${house.logement_id}')">Modifier</button>
+                    <button class="delete-btn" onclick="deleteHouse('${house.logement_id}')">Supprimer</button>
+
+                  </div>
+                </div>
+            </div>
+        `;
+    });
+}
+    // --- OUVRIR LE MODAL POUR AJOUTER ---
+    function openAddModal() {
+      editingIndex = null;
+      document.getElementById('modalTitle').innerText = 'Ajouter une maison';
+      //document.getElementById('saveHouseBtn').onclick = addHouse;
+
+      clearModalFields();
+      document.getElementById('houseModal').style.display = 'block';
+    }
+
+    // --- FERMER LE MODAL ---
+    function closeModal() {
+      document.getElementById('houseModal').style.display = 'none';
+    }
+
+    // --- AJOUTER UNE MAISON ---
+    async function saveHouse(event) {
+      event.preventDefault(); // Prevent the default form submission
+      const token = localStorage.getItem('token'); // Get the token from local storage
+
+      if (!token) {
+        console.error('No token found');
+        return;
+      }
+      const houseData = readModalFields(); // Gather data from the modal fields
+      console.log('House data before submission:', houseData); // Log house data for debugging
+      // Prepare the form data for submission
+      
+      const formData = new FormData();
+      formData.append('nom_dep', houseData.nom_dep);
+      formData.append('Description_log', houseData.Description_log);
+      formData.append('ville', houseData.ville);
+      formData.append('prix', houseData.prix);
+      formData.append('WIFI', houseData.WIFI);
+      formData.append('Chauffage', houseData.Chauffage);
+      formData.append('chambre', houseData.chambre);
+      formData.append('distance', houseData.distance);
+      formData.append('duree', houseData.duree);
+
+      // Append images to the form data
+      houseData.images.forEach((image, index) => {
+        if (index === 0) {
+            formData.append('logement_url', image); // First image with key 'logement_url'
+        } else {
+            formData.append(`url${index}`, image); // Subsequent images with keys 'url1', 'url2', etc.
+        }
+    });
+      // Log the contents of formData
+      for (let [key, value] of formData.entries()) {
+        console.log(`Bonjour`);
+        console.log(`${key}: ${value}`);
+      }
+      try {
+        const response = await fetch('/api/logements', {
+          method: 'POST',
+          headers: {
+                'Authorization': `Bearer ${token}` // Include the token in the Authorization header
+            },
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        // Optionally, handle the response
+        const result = await response.json();
+        console.log('House added:', result);
+        closeModal(); // Close the modal after successful submission
+        fetchHouses(); // Refresh the house list
+      } catch (error) {
+        console.error('Error adding house:', error);
+      }
+    }
+
+    // --- LIRE LES CHAMPS DU MODAL ---
+function readModalFields() {
+  const nom_dep = document.getElementById('houseName').value;
+  const Description_log = document.getElementById('houseDesc').value;
+  const ville = document.getElementById('houseCity').value;
+  const prix = document.getElementById('housePrice').value;
+  const WIFI = document.getElementById('houseWifi').value;
+  const Chauffage = document.getElementById('houseHeating').value;
+  const chambre = document.getElementById('houseRooms').value;
+  const distance = document.getElementById('houseDistance').value;
+  const duree = document.getElementById('houseDuration').value; // Ensure this is correct
+  const files = [
+    ...document.getElementById('houseImages1').files,
+    ...document.getElementById('houseImages2').files,
+    ...document.getElementById('houseImages3').files,
+    ...document.getElementById('houseImages4').files,
+    ...document.getElementById('houseImages5').files,
+    ...document.getElementById('houseImages6').files,
+    ...document.getElementById('houseImages7').files
+  ].slice(0, 7);
+
+  return { nom_dep, Description_log, ville, prix, WIFI, Chauffage, chambre, distance, duree, images: files };
+}
+    // --- VIDER LES CHAMPS DU MODAL ---
+    function clearModalFields() {
+      document.getElementById('houseName').value = '';
+      document.getElementById('houseDesc').value = '';
+      document.getElementById('houseImages1').value = '';
+      document.getElementById('houseImages2').value = '';
+      document.getElementById('houseImages3').value = '';
+      document.getElementById('houseImages4').value = '';
+      document.getElementById('houseImages5').value = '';
+      document.getElementById('houseImages6').value = '';
+      document.getElementById('houseImages7').value = '';
+      document.getElementById('houseCity').value = 'Casablanca';
+      document.getElementById('housePrice').value = '';
+      document.getElementById('houseWifi').value = 'Oui';
+      document.getElementById('houseHeating').value = 'Oui';
+      document.getElementById('houseRooms').value = '';
+      document.getElementById('houseDistance').value = '';
+      document.getElementById('houseDuration').value = '';
+    }
+
+    async function updateHouse(logement_id) {
+    // Open the modal for editing
+    editingIndex = logement_id;
+    document.getElementById('modalTitle').innerText = 'Modifier la maison';
+    document.getElementById('saveHouseBtn').onclick = saveUpdatedHouse;
+
+    // Ensure houses is defined and is an array
+    if (!Array.isArray(houses) || houses.length === 0) {
+        console.error('Houses data is not available or not an array');
+        return;
+    }
+
+    // Log the houses array and the logement_id for debugging
+    console.log('Houses array:', houses);
+    console.log('Looking for house with ID:', logement_id);
+
+    // Pre-fill the fields with the current house data
+    const house = houses.find(h => h.logement_id === logement_id);
+
+    if (!house) {
+        console.error('House not found');
+        return;
+    }
+
+    document.getElementById('houseName').value = house.nom_dep;
+    document.getElementById('houseDesc').value = house.Description_log;
+    document.getElementById('houseCity').value = house.ville;
+    document.getElementById('housePrice').value = house.prix;
+    document.getElementById('houseWifi').value = house.WIFI;
+    document.getElementById('houseHeating').value = house.Chauffage;
+    document.getElementById('houseRooms').value = house.chambre;
+    document.getElementById('houseDistance').value = house.distance;
+    document.getElementById('houseDuration').value = house.duree;
+
+    // Show the modal
+    document.getElementById('houseModal').style.display = 'block';
+}
+
+// Function to save the updated house data
+async function saveUpdatedHouse(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const houseData = readModalFields(); // Gather data from the modal fields
+    const formData = new FormData();
+    formData.append('logement_id', editingIndex); // Include the ID of the house being updated
+
+    formData.append('nom_dep', houseData.nom_dep);
+    formData.append('Description_log', houseData.Description_log);
+    formData.append('ville', houseData.ville);
+    formData.append('prix', houseData.prix);
+    formData.append('WIFI', houseData.WIFI);
+    formData.append('Chauffage', houseData.Chauffage);
+    formData.append('chambre', houseData.chambre);
+    formData.append('distance', houseData.distance);
+    formData.append('duree', houseData.duree);
+
+    // Append images to the form data
+    houseData.images.forEach((image, index) => {
+        if (index === 0) {
+            formData.append('logement_url', image); // First image with key 'logement_url'
+        } else {
+            formData.append(`url${index}`, image); // Subsequent images with keys 'url1', 'url2', etc.
+        }
+    });
+
+    console.log('House data before submission:', houseData); // Log house data for debugging
+
+    // Log the contents of formData
+    for (let [key, value] of formData.entries()) {
+        console.log(`Barcelonat : ${key}: ${value}`);
+    }
+
+    const token = localStorage.getItem('token'); // Get the token from local storage
+
+    if (!token) {
+        console.error('No token found');
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/logements`, {
+            method: 'PUT', // Ensure this is PUT for updates
+            headers: {
+                'Authorization': `Bearer ${token}` // Include the token in the Authorization header
+            },
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const result = await response.json();
+        console.log('House updated:', result);
+        closeModal(); // Close the modal after successful submission
+        fetchHouses(); // Refresh the house list
+    } catch (error) {
+        console.error('Error updating house:', error);
+    }
+}
+
+    // --- SUPPRIMER UNE MAISON ---
+    async function deleteHouse(logement_id) {
+    if (!confirm("Voulez-vous vraiment supprimer cette maison ?")) return;
+
+    try {
+        const response = await fetch('/api/logements', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: logement_id }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            alert(data.message); // Show success message
+            fetchHouses(); // Refresh the house list after deletion
+        } else {
+            const error = await response.json();
+            alert('Error: ' + error.message); // Show error message
+        }
+    } catch (error) {
+        console.error('Error deleting house:', error);
+    }
+}
+
+    // --- TRIER LES MAISONS ---
+    function sortHouses() {
+        const criteria = document.getElementById('sortCriteria').value;
+
+        houses.sort((a, b) => {
+            switch (criteria) {
+                case 'priceAsc':
+                    return a.prix - b.prix;
+                case 'priceDesc':
+                    return b.prix - a.prix;
+                case 'cityAsc':
+                    return a.ville.localeCompare(b.ville);
+                case 'cityDesc':
+                    return b.ville.localeCompare(a.ville);
+                case 'distanceAsc':
+                    return a.distance - b.distance;
+                case 'distanceDesc':
+                    return b.distance - a.distance;
+                default:
+                    return 0;
+            }
+        });
+
+        displayHouses(houses);
+    }
+
+    
+
+    // --- LANCEMENT DE LA PAGE ---
+    document.addEventListener('DOMContentLoaded', displayHouses);
+  </script>
+</body>
+</html>

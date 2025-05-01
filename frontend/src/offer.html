@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recherche de Logements</title>
+  <style>
+    /* Style général */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      color: #333;
+    }
+    /* Header (inchangé) */
+      /* Header */
+      header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            margin: 0 15px;
+            color: #00A2CE;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #00BBD0;
+            text-decoration: underline;
+        }
+    .signup {
+      background: #007BFF;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .signin {
+      background: #28A745;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    /* Barre de recherche améliorée */
+    .search-container {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      background: white;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: white;
+      padding: 10px 15px;
+      border-radius: 30px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .search-box select,
+    .search-box input {
+      border: none;
+      background: white;
+      padding: 8px 12px;
+      font-size: 16px;
+      color: #333;
+    }
+    .search-box select:focus,
+    .search-box input:focus {
+      outline: none;
+    }
+    .search-box select:hover,
+    .search-box input:hover {
+      background: #eee;
+      border-radius: 5px;
+    }
+    /* Boutons Recherche et Réinitialiser avec effet "pressé" */
+    .search-btn, #reset-btn {
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: transform 0.1s ease;
+    }
+    .search-btn:active, #reset-btn:active {
+      transform: scale(0.95);
+    }
+    /* Grille des offres : 3 offres par ligne (total de 4 lignes = 12 offres) */
+    .logements {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 1200px;
+    }
+    .logement-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .logement-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .logement-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .logement-card:hover img {
+      transform: scale(1.05);
+    }
+    .logement-details {
+      padding: 15px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-weight: bold;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background: #5FE3A4;
+        }
+    .logement-details h2 {
+      font-size: 22px;
+      color: #87CEEB;
+      margin: 0 0 10px;
+      text-align: center;
+    }
+    /* Conteneur pour les informations et le bouton */
+    .info-and-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+    .info-row span {
+      background: #e6f2ff;
+      padding: 4px 8px;
+      border-radius: 5px;
+    }
+    /* Bouton Sélectionner centré */
+    .select-btn {
+      background: #007BFF;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s ease;
+      display: block;
+      margin: 10px auto 0;
+    }
+    .select-btn:hover {
+      background: #0056b3;
+    }
+    /* Pied de page (inchangé) */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #87CEEB;
+      color: white;
+    }
+    .social-icons a {
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .social-icons a:hover {
+      text-decoration: underline;
+    }
+    .signup {
+            background: #00A2CE;
+            color: white;
+        }
+
+        .signin {
+            background: #00BBD0;
+            color: white;
+        }
+    button {
+      padding: 8px 15px;
+      margin: 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #87CEEB;
+      color: white;
+      width: 100%;
+      position: relative;
+      bottom: 0;
+      left: 0;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .social-icons a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .social-icons a:hover {
+      text-decoration: underline;
+    }
+    /* Responsive : 1 colonne pour les petits écrans, 2 colonnes pour tablette */
+    @media (max-width: 768px) {
+      .logements {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .logements {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- En-tête -->
+  <header>
+    <a href="index.html" class="logo">
+        <img src="photo/studar logo LONG.png" alt="Étudiant Logement" class="logo-img">
+    </a>
+        
+    <nav>
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="offer.html" class="nav-link">OFFER</a>
+        <a href="#" class="nav-link">CONTACT US</a>
+       
+        <a href="choisirTypeSinup.html"> <button class="signup">Sign Up</button></a>
+        <a href="choisirTypeSinin.html"> <button class="signin">Sign In</button></a>
+    </nav>
+</header>
+  <!-- Barre de recherche améliorée -->
+  <div class="search-container">
+    <div class="search-box">
+      <!-- Existing filters -->
+      <select id="filter-ville">
+          <option value="">Ville</option>
+          <option value="Guelmim">Guelmim</option>
+          <option value="Teznit">Teznit</option>
+          <option value="Agadir">Agadir</option>
+          <option value="Casablanca">Casablanca</option>
+          <option value="Rabat">Rabat</option>
+          <option value="Marrakech">Marrakech</option>
+      </select>
+      <select id="filter-distance">
+          <option value="">Distance</option>
+          <option value="5">5 min</option>
+          <option value="20">20 min</option>
+          <option value="30">30 min</option>
+          <option value="40">+40 min</option>
+          <option value="50">+50 min</option>
+          <option value="60">+60 min </option>
+      </select>
+      <select id="filter-duree">
+          <option value="">Durée</option>
+          <option value="1">1 mois</option>
+          <option value="2">2 mois</option>
+          <option value="3">3 mois</option>
+          <option value="4">4 mois</option>
+          <option value="5">5 mois</option>
+          <option value="6">6 mois</option>
+          <option value="7">7 mois</option>
+          <option value="8">8 mois</option>
+          <option value="9">9 mois</option>
+          <option value="10">10 mois</option>
+          <option value="11">11 mois</option>
+          <option value="12">+1 ans</option>
+      </select>
+      <select id="filter-chambres">
+          <option value="">Chambres</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">+4</option>
+      </select>
+      
+      
+      <!-- New filters for Chauffage and WIFI -->
+      <select id="filter-Chauffage">
+          <option value="">Chauffage</option>
+          <option value="Oui">Oui</option>
+          <option value="Non">Non</option>
+      </select>
+      <select id="filter-WIFI">
+          <option value="">WIFI</option>
+          <option value="Oui">Oui</option>
+          <option value="Non">Non</option>
+      </select>
+      <input type="number" id="filter-prix" placeholder="Prix max">
+      <button class="search-btn" onclick="filterOffers()">🔍</button>
+      <button id="reset-btn" onclick="resetFilters()">↺</button>
+  </div>
+  </div>
+  <!-- Grille des offres (12 offres, 3 par ligne) -->
+  <div class="logements"></div>
+  <footer>
+    <p>Suivez-nous :</p>
+    <div class="social-icons">
+      <a href="#" class="facebook">Facebook</a>
+      <a href="#" class="instagram">Instagram</a>
+      <a href="https://wa.me/123456789" class="whatsapp">WhatsApp</a>
+    </div>
+  </footer>
+  <!-- Ici, nous avons supprimé la fenêtre pop-up (modal). -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchOffers(); // Fetch all offers on page load
+    });
+    
+    async function fetchOffers(queryParams = '') {
+      try {
+        const response = await fetch(`/offre/offres?${queryParams}`);
+        const logements = await response.json();
+        console.log('Fetched logements:', logements);
+        displayResults(logements);
+      } catch (error) {
+        console.error('Error fetching offers:', error);
+      }
+    }
+    
+    async function filterOffers() {
+      const ville = document.getElementById('filter-ville').value;
+      const distance = document.getElementById('filter-distance').value;
+      const duree = document.getElementById('filter-duree').value;
+      const chambres = document.getElementById('filter-chambres').value;
+      const prix = document.getElementById('filter-prix').value;
+      const Chauffage = document.getElementById('filter-Chauffage').value;
+      const WIFI = document.getElementById('filter-WIFI').value;
+    
+      
+
+      const queryParams = new URLSearchParams({
+        ville,
+        distance,
+        duree,
+        chambres,
+        prix,
+        Chauffage,
+        WIFI
+      });
+    
+      fetchOffers(queryParams.toString());
+    }
+    
+    function displayResults(logements) {
+  const resultsDiv = document.querySelector('.logements');
+  resultsDiv.innerHTML = '';
+
+  if (!Array.isArray(logements)) {
+    console.error('Expected an array but got:', logements);
+    return;
+  }
+
+  logements.forEach(logement => {
+    const logementDiv = document.createElement('div');
+    logementDiv.classList.add('logement-card');
+    logementDiv.setAttribute('data-ville', logement.ville);
+    logementDiv.setAttribute('data-distance', logement.distance);
+    logementDiv.setAttribute('data-duree', logement.duree);
+    logementDiv.setAttribute('data-chambres', logement.chambre);
+    logementDiv.setAttribute('data-prix', logement.prix);
+    logementDiv.setAttribute('data-description', logement.Description_log);
+    logementDiv.setAttribute('data-Chauffage', logement.Chauffage);
+    logementDiv.setAttribute('data-WIFI', logement.WIFI);
+
+    // Ajouter les attributs data-url pour les images
+    for (let i = 0; i < logement.image_url.length; i++) {
+      logementDiv.setAttribute(`data-url${i}`, logement.image_url[i]);
+    }
+
+    logementDiv.innerHTML = `
+      <img src="${logement.image_url[1]}" alt="Logement">
+      <div class="logement-details">
+        <h2>${logement.nom_dep}</h2>
+        <div class="info-and-btn">
+          <div class="info-row">
+            <span>Ville : ${logement.ville}</span>
+            <span>Distance : ${logement.distance} min</span>
+            <span>Durée : ${logement.duree} mois</span>
+            <span>Chambres : ${logement.chambre}</span>
+            <span>Prix : ${logement.prix}MAD/mois</span>
+            <span>Chauffage : ${logement.Chauffage}</span>
+            <span>WIFI : ${logement.WIFI}</span>
+          </div>
+          <button class="select-btn" onclick="selectOffer(this.parentElement.parentElement.parentElement)">Sélectionner</button>
+        </div>
+      </div>
+    `;
+
+    resultsDiv.appendChild(logementDiv);
+  });
+}
+    function selectOffer(logementCard) {
+  const logementData = {
+    ville: logementCard.getAttribute('data-ville'),
+    distance: logementCard.getAttribute('data-distance'),
+    duree: logementCard.getAttribute('data-duree'),
+    chambres: logementCard.getAttribute('data-chambres'),
+    prix: logementCard.getAttribute('data-prix'),
+    description: logementCard.getAttribute('data-description'),
+    Chauffage: logementCard.getAttribute('data-Chauffage'),
+    WIFI: logementCard.getAttribute('data-WIFI'),
+    image_url: []
+      };
+
+      for (let i = 0; i <= 6; i++) {
+        const url = logementCard.getAttribute(`data-url${i}`);
+        logementData.image_url.push(url ? url : null);
+      }
+
+  localStorage.setItem('selectedLogement', JSON.stringify(logementData));
+  window.location.href = '/selectionnent.html';
+}
+function resetFilters() {
+    document.getElementById('filter-ville').value = '';
+    document.getElementById('filter-distance').value = '';
+    document.getElementById('filter-duree').value = '';
+    document.getElementById('filter-chambres').value = '';
+    document.getElementById('filter-prix').value = '';
+    document.getElementById('filter-Chauffage').value = '';
+    document.getElementById('filter-WIFI').value = '';
+    fetchOffers(); // Fetch all offers again
+}
+    </script>
+</body>
+</html>

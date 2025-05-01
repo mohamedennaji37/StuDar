@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Propriétaire</title>
+    <style>
+        /* Style général */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #F3F9FB;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            margin: 0 15px;
+            color: #00A2CE;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #00BBD0;
+            text-decoration: underline;
+        }
+
+        .search {
+            padding: 8px;
+            border: 1px solid #00BBD0;
+            border-radius: 4px;
+            background: white;
+            color: #333;
+        }
+
+        /* Boutons */
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-weight: bold;
+        }
+
+        .signup {
+            background: #00A2CE;
+            color: white;
+        }
+
+        .signin {
+            background: #00BBD0;
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #5FE3A4;
+        }
+
+        /* Container principal */
+        .login-container {
+            background: #E0F7FA;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: 50px auto;
+        }
+
+        /* Titre */
+        h1 {
+            text-align: center;
+            color: #00A2CE;
+        }
+
+        /* Formulaire de connexion */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #00A2CE;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #00BBD0;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .link a {
+            color: #00A2CE;
+            text-decoration: none;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Pied de page */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #00A2CE;
+            color: white;
+            margin-top: 140px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .social-icons a:hover {
+            color: #5FE3A4;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- En-tête -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="photo/studar logo LONG.png" alt="Étudiant Logement" class="logo-img">
+        </a>        <nav>
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="#" class="nav-link">OFFER</a>
+            <a href="#" class="nav-link">CONTACT US</a>
+           
+            <a href="choisirType.html"> <button class="signup">Sign Up</button></a>
+            <a href="choisirType.html"> <button class="signin">Sign In</button></a>
+        </nav>
+    </header>
+
+    <!-- Container de connexion -->
+    <div class="login-container">
+        <h1>Se connecter en tant que propriétaire</h1>
+        <form id="loginFormProp" method="post" action="/signinProp">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="Entrez votre email">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe">
+            <input type="submit" value="Se connecter">
+        </form>
+        <div class="link">
+            <a href="#">Mot de passe oublié ?</a>
+        </div>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>Suivez-nous :</p>
+        <div class="social-icons">
+            <a href="#" class="facebook">Facebook</a>
+            <a href="#" class="instagram">Instagram</a>
+            <a href="https://wa.me/123456789" class="whatsapp">WhatsApp</a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('loginFormProp').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+    
+            try {
+                const response = await fetch('/signin/signinProp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
+    
+                const data = await response.json();
+                if (response.ok) {
+                    localStorage.setItem('token', data.token); // Store the token in local storage
+                    alert('Login successful!');
+                    window.location.href = "/propri_home.html"; // Redirect to the offer page
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred during login.');
+            }
+        });
+    </script>
+</body>
+</html>
